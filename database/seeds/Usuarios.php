@@ -17,7 +17,7 @@ class Usuarios extends Seeder
             'nombres' => 'Admin',
             'apellidos' => 'Admin',
             'telefono' => '0000',
-            'password' => '123456',
+            'password' => '0',
             'estado' => 1,
             'idCreador' => 1,
             'remember_token' => null,
