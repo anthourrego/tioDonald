@@ -39,9 +39,11 @@ class UserController extends Controller
         if (is_object($usuario)){
             $jwt = new JwtLogin();
             $token = $jwt->generarToken($usuario->id, $usuario->nroDocumento, $usuario->password);
+            $validarToken = $jwt->verificarToken($token, true);
             return array(
                     'success' => true,
                     'token' => $token,
+                    'tokenTiempo' => $validarToken,
                     'usuario' => $usuario
             );            
         }else {
@@ -131,26 +133,35 @@ class UserController extends Controller
 
     public function validarToken(Request $request){
         $token = $request->header('Authorization', null);
-
+        $tiempoToken = (int)$request->tiempoToken;
+        
         if ($token != null){
-            $jwt = new JwtLogin();
-            $tokenValido = $jwt->verificarToken($token);
-            if ($tokenValido == true ){
-                return new JsonResponse(array(
-                    'success' => true,
-                    'mensaje' => 'Token valido'
-                ),200);
+            if(time() < $tiempoToken){
+                $jwt = new JwtLogin();
+                $tokenValido = $jwt->verificarToken($token);
+                if ($tokenValido == true ){
+                    return array(
+                        'success' => true,
+                        'mensaje' => 'Token valido',
+                    );
+                }else{
+                    return array(
+                        'success' => false,
+                        'mensaje' => 'Token inválido',
+                    );
+                }
             }else{
-                return new JsonResponse(array(
+                return array(
                     'success' => false,
-                    'mensaje' => 'Token inválido'
-                ),401);
+                    'mensaje' => 'Sesión expirada',
+                );
             }
+            
         }else{
-            return new JsonResponse(array(
+            return array(
                 'success' => false,
-                'mensaje' => 'Falta el token de autorización'
-            ),401);
+                'mensaje' => 'Falta el token de autorización',
+            );
         }
     }
 }
