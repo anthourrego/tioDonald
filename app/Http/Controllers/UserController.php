@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Firebase\JWT\JWT;
 use App\Helpers\JwtLogin;
+use Illuminate\Http\JsonResponse;
 
 
 /**
@@ -128,7 +129,7 @@ class UserController extends Controller
         //
     }
 
-    public function validarToken(){
+    public function validarToken(Request $request){
         $token = $request->header('Authorization', null);
 
         if ($token != null){
