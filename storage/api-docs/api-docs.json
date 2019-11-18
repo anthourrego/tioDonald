@@ -23,6 +23,20 @@
                     }
                 }
             }
+        },
+        "/api/actualizarDatos": {
+            "put": {
+                "summary": "actualizarDatos",
+                "operationId": "App\\Http\\Controllers\\UserController::actualizarDatos",
+                "responses": {
+                    "200": {
+                        "description": "Se actualizan los datos del usuario logeado."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
         }
     }
 }
