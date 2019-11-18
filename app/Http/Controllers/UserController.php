@@ -131,6 +131,39 @@ class UserController extends Controller
         //
     }
 
+    /**
+    * @OA\put(
+    *     path="/api/actualizarDatos",
+    *     summary="actualizarDatos",
+    *     @OA\Response(
+    *         response=200,
+    *         description="Se actualizan los datos del usuario logeado."
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
+
+    public function actualizarDatos(Request $request){
+        $usuario = User::find($request->id);
+
+        if(!is_null($usuario)){
+            $usuario{'nombres'} = $request->nombre;
+            $usuario{'apellidos'} = $request->apellidos;
+            $usuario{'telefono'} = $request->telefono; 
+            $usuario->save();
+            $resp = array("success" => true,
+                        "mensaje" => "Usuario actualizado correctamente");
+        }else{
+            $resp = array("success" => false,
+                         "mensaje" => "No se ha encontrado el usuario");
+        }
+
+        return $resp;
+    } 
+
     public function validarToken(Request $request, $tiempoToken){
         $token = $request->header('Authorization', null);
         $tiempoToken = (int)$tiempoToken;

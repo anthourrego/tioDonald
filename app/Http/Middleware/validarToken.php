@@ -30,21 +30,24 @@ class validarToken
                 }else{
                     return new JsonResponse(array(
                         'success' => false,
+                        'token' => true,
                         'mensaje' => 'Token inválido'
-                    ),401);
+                    ),200);
                 }
             }else{
                 return new JsonResponse(array(
                     'success' => false,
+                    'token' => true,
                     'mensaje' => 'Sesión expirada'
-                ),401);
+                ),200);
             }
             
         }else{
             return new JsonResponse(array(
                 'success' => false,
+                'token' => true,
                 'mensaje' => 'Falta el token de autorización'
-            ),401);
+            ),200);
         }
     }
 }

@@ -22,7 +22,7 @@ class JwtLogin
             'iat' => time(),
             //Tiempo de expiracion del token
             //'exp' => time() + ( 7 * 24 * 60 * 6 )
-            'exp' => time() + ( 20 )
+            'exp' => time() + ( 30 )
         );
         return JWT::encode($payload,$this->llaveSecreta, $this->algoritmo);
     }
