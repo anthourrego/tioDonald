@@ -31,10 +31,10 @@ class UserController extends Controller
     *     )
     * )
     */
-    public function inicioSesion(Request $request){
+    public function inicioSesion($nroDoc, $pass){
         $usuario = User::where(array(
-           'nroDocumento' => $request->nroDoc,
-            'password' => $request->pass
+           'nroDocumento' => $nroDoc,
+            'password' => $pass
         ))->first();
         if (is_object($usuario)){
             $jwt = new JwtLogin();
@@ -131,9 +131,9 @@ class UserController extends Controller
         //
     }
 
-    public function validarToken(Request $request){
+    public function validarToken(Request $request, $tiempoToken){
         $token = $request->header('Authorization', null);
-        $tiempoToken = (int)$request->tiempoToken;
+        $tiempoToken = (int)$tiempoToken;
         
         if ($token != null){
             if(time() < $tiempoToken){
