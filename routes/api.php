@@ -28,6 +28,7 @@ Route::middleware('token')->group(function () {
     //Controlador de usuario
     Route::put('actualizarDatos', 'UserController@actualizarDatos');
     Route::post('crearUsuario', 'UserController@crearUsuario');
+    Route::get('listaUsuarios/{tiempoToken}', 'UserController@listaUsuarios');
     /*Route::get('/', 'Auth\LoginController@mostrarLogin')->name('mostrarLogin');
     Route::post('login', 'Auth\LoginController@login')->name('login');*/
 

@@ -208,6 +208,26 @@ class UserController extends Controller
         return $resp;
     } 
 
+    /**
+    * @OA\put(
+    *     path="/api/listaUsuarios",
+    *     summary="listaUsuarios",
+    *     @OA\Response(
+    *         response=200,
+    *         description="Se actualizan los datos del usuario logeado."
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
+
+    public function listaUsuarios(Request $request){
+        $usuarios = User::all();
+        return $usuarios;
+    } 
+
     public function validarToken(Request $request, $tiempoToken){
         $token = $request->header('Authorization', null);
         $tiempoToken = (int)$tiempoToken;
