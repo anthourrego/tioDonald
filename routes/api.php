@@ -24,7 +24,10 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware('token')->group(function () {
     Route::get('mesas', 'MesasController@index');   
     
+
+    //Controlador de usuario
     Route::put('actualizarDatos', 'UserController@actualizarDatos');
+    Route::post('crearUsuario', 'UserController@crearUsuario');
     /*Route::get('/', 'Auth\LoginController@mostrarLogin')->name('mostrarLogin');
     Route::post('login', 'Auth\LoginController@login')->name('login');*/
 

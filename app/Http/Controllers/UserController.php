@@ -133,6 +133,50 @@ class UserController extends Controller
 
     /**
     * @OA\put(
+    *     path="/api/crearUsuario",
+    *     summary="crearUsuario",
+    *     @OA\Response(
+    *         response=200,
+    *         description="Se va crear el usuario."
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
+
+    public function crearUsuario(Request $request){
+        $validar = User::where('nroDocumento', $request->nroDoc)->get();
+        
+        if($validar->isEmpty()){
+            $usuario = new User;
+            $usuario->nroDocumento = $request->nroDoc;
+            $usuario->nombres = $request->nombres;
+            $usuario->apellidos = $request->apellidos;
+            $usuario->telefono = $request->telefono;
+            $usuario->password = $request->nroDoc;
+            $usuario->estado = 1;
+            $usuario->idCreador = $request->idCreador; 
+            
+            if($usuario->save()){
+                $resp = array("success" => true,
+                              "mensaje" => "Se ha creado el usuario");
+            }else{
+                $resp = array("success" => false,
+                              "mensaje" => "No se ha creado el usuario");
+            }
+            
+        }else{
+            $resp = array("success" => false,
+                         "mensaje" => "El número de documento ya se encuentra registrado");
+        }
+
+        return $resp;
+    }
+
+    /**
+    * @OA\put(
     *     path="/api/actualizarDatos",
     *     summary="actualizarDatos",
     *     @OA\Response(
