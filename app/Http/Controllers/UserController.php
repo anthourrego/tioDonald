@@ -224,8 +224,38 @@ class UserController extends Controller
     */
 
     public function listaUsuarios(Request $request){
-        $usuarios = User::all();
+        $usuarios = User::where("estado", 1)->get();
         return $usuarios;
+    } 
+
+    /**
+    * @OA\put(
+    *     path="/api/dehabilitarUsuario",
+    *     summary="dehabilitarUsuario",
+    *     @OA\Response(
+    *         response=200,
+    *         description="Se actualizan los datos del usuario logeado."
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
+
+    public function deshabilitarUsuario(Request $request){
+        $usuario = User::find($request->id);
+        
+        $usuario{'estado'} = 0;
+
+        if ($usuario->save()) {
+            $resp = array("success" => true,
+                         "mensaje" => "Usuario deshabilitado");
+        }else{
+            $resp = array("success" => false,
+                         "mensaje" => "Error al deshabilitar el usuario");
+        }
+        return $resp;
     } 
 
     public function validarToken(Request $request, $tiempoToken){
