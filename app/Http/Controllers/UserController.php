@@ -225,7 +225,15 @@ class UserController extends Controller
 
     public function listaUsuarios(Request $request){
         $usuarios = User::where("estado", 1)->get();
-        return $usuarios;
+
+        if (!$usuarios->isEmpty()) {
+            $resp = array("success" => true,
+                         "mensaje" => $usuarios);
+        }else{
+            $resp = array("success" => false,
+                          "mensaje" => "No hay datos");
+        }
+        return $resp;
     } 
 
     /**
