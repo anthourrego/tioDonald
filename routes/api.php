@@ -30,6 +30,12 @@ Route::middleware('token')->group(function () {
     Route::post('crearUsuario', 'UserController@crearUsuario');
     Route::get('listaUsuarios/{tiempoToken}', 'UserController@listaUsuarios');
     Route::put('deshabilitarUsuario', 'UserController@deshabilitarUsuario');
+
+    //Controlador de platos
+    Route::get('listaPlatos/{tiempoToken}', 'PlatosController@listaPlatos');
+    Route::post('crearPlato', 'PlatosController@crearPlato');
+    Route::put('actualizarPlato', 'PlatosController@actualizarPlato');
+    Route::put('dashabilitatPlato', 'PlatosController@dashabilitatPlato');
     /*Route::get('/', 'Auth\LoginController@mostrarLogin')->name('mostrarLogin');
     Route::post('login', 'Auth\LoginController@login')->name('login');*/
 

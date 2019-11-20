@@ -209,7 +209,7 @@ class UserController extends Controller
     } 
 
     /**
-    * @OA\put(
+    * @OA\get(
     *     path="/api/listaUsuarios",
     *     summary="listaUsuarios",
     *     @OA\Response(
@@ -226,7 +226,7 @@ class UserController extends Controller
     public function listaUsuarios(Request $request){
         $usuarios = User::where("estado", 1)->get();
 
-        if (!$usuarios->isEmpty()) {
+        if (!empty($usuarios)) {
             $resp = array("success" => true,
                          "mensaje" => $usuarios);
         }else{
