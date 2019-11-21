@@ -12,22 +12,42 @@ use Illuminate\Http\JsonResponse;
 /**
 * @OA\Info(title="Proyecto Android Laravel", version="1.0")
 *
-* @OA\Server(url="http://192.168.0.9:8000")
+* @OA\Server(url="http://127.0.0.1:8000/api")
 */
 
 class UserController extends Controller
 {
     /**
     * @OA\Get(
-    *     path="/api/login",
-    *     summary="Inicar sesion",
-    *     @OA\Response(
-    *         response=200,
-    *         description="Iniciar sesion."
+    *     path="/login/{nroDoc}/{pass}",
+    *     description="Iniciar sesión",
+    *     operationId="inicioSesion",
+    *     @OA\Parameter(
+    *         name="nroDoc",
+    *         in="path",
+    *         description="Numero de documento",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="String",
+    *         ),
+    *         style="form"
+    *     ),
+    *     @OA\Parameter(
+    *         name="pass",
+    *         in="path",
+    *         description="Contraseña inicio de sesion",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
     *     ),
     *     @OA\Response(
     *         response="default",
     *         description="Ha ocurrido un error."
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Iniciar sesion."
     *     )
     * )
     */
@@ -132,16 +152,63 @@ class UserController extends Controller
     }
 
     /**
-    * @OA\put(
-    *     path="/api/crearUsuario",
-    *     summary="crearUsuario",
-    *     @OA\Response(
-    *         response=200,
-    *         description="Se va crear el usuario."
+    * @OA\Post(
+    *     path="/crearUsuario",
+    *     description="Iniciar sesión",
+    *     operationId="crearUsuario",
+    *     @OA\Parameter(
+    *         name="nroDoc",
+    *         in="path",
+    *         description="Numero de documento",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="String",
+    *         ),
+    *         style="form"
+    *     ),
+    *     @OA\Parameter(
+    *         name="nombres",
+    *         in="path",
+    *         description="Nombres del usuario",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
+    *     ),
+    *     @OA\Parameter(
+    *         name="apellidos",
+    *         in="path",
+    *         description="Apellidos del usuario",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
+    *     ),
+    *     @OA\Parameter(
+    *         name="telefonos",
+    *         in="path",
+    *         description="Telefono del usuario",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
+    *     ),
+    *     @OA\Parameter(
+    *         name="idCreador",
+    *         in="path",
+    *         description="Creador",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
     *     ),
     *     @OA\Response(
     *         response="default",
     *         description="Ha ocurrido un error."
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Iniciar sesion."
     *     )
     * )
     */
@@ -176,16 +243,53 @@ class UserController extends Controller
     }
 
     /**
-    * @OA\put(
-    *     path="/api/actualizarDatos",
-    *     summary="actualizarDatos",
-    *     @OA\Response(
-    *         response=200,
-    *         description="Se actualizan los datos del usuario logeado."
+    * @OA\Put(
+    *     path="/actualizarDatos",
+    *     description="Iniciar sesión",
+    *     operationId="actualizarDatos",
+    *     @OA\Parameter(
+    *         name="nombre",
+    *         in="path",
+    *         description="Nombres del usuario",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
+    *     ),
+    *     @OA\Parameter(
+    *         name="apellidos",
+    *         in="path",
+    *         description="Apellidos del usuario",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
+    *     ),
+    *     @OA\Parameter(
+    *         name="telefono",
+    *         in="path",
+    *         description="Telefono del usuario",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
+    *     ),
+    *     @OA\Parameter(
+    *         name="id",
+    *         in="path",
+    *         description="id Usuario",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
     *     ),
     *     @OA\Response(
     *         response="default",
     *         description="Ha ocurrido un error."
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Iniciar sesion."
     *     )
     * )
     */
@@ -209,16 +313,26 @@ class UserController extends Controller
     } 
 
     /**
-    * @OA\get(
-    *     path="/api/listaUsuarios",
-    *     summary="listaUsuarios",
-    *     @OA\Response(
-    *         response=200,
-    *         description="Se actualizan los datos del usuario logeado."
+    * @OA\Get(
+    *     path="listaUsuarios/{tiempoToken}",
+    *     description="Iniciar sesión",
+    *     operationId="actualizarDatos",
+    *     @OA\Parameter(
+    *         name="tiempoToken",
+    *         in="path",
+    *         description="Tiempo del token",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
     *     ),
     *     @OA\Response(
     *         response="default",
     *         description="Ha ocurrido un error."
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Iniciar sesion."
     *     )
     * )
     */
@@ -237,16 +351,26 @@ class UserController extends Controller
     } 
 
     /**
-    * @OA\put(
-    *     path="/api/dehabilitarUsuario",
-    *     summary="dehabilitarUsuario",
-    *     @OA\Response(
-    *         response=200,
-    *         description="Se actualizan los datos del usuario logeado."
+    * @OA\Put(
+    *     path="/deshabilitarUsuario",
+    *     description="Deshabilitar usuarios",
+    *     operationId="deshabilitarUsuario",
+    *     @OA\Parameter(
+    *         name="id",
+    *         in="path",
+    *         description="Id del usuario",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
     *     ),
     *     @OA\Response(
     *         response="default",
     *         description="Ha ocurrido un error."
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Iniciar sesion."
     *     )
     * )
     */

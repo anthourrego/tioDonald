@@ -6,17 +6,17 @@
     },
     "servers": [
         {
-            "url": "http://192.168.0.9:8000"
+            "url": "http://127.0.0.1:8000/api"
         }
     ],
     "paths": {
-        "/api/login": {
+        "/api/listaUsuarios": {
             "get": {
-                "summary": "Inicar sesion",
-                "operationId": "App\\Http\\Controllers\\UserController::inicioSesion",
+                "summary": "listaUsuarios",
+                "operationId": "App\\Http\\Controllers\\PlatosController::listaPlatos",
                 "responses": {
                     "200": {
-                        "description": "Iniciar sesion."
+                        "description": "Se actualizan los datos del usuario logeado."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."
@@ -24,16 +24,243 @@
                 }
             }
         },
-        "/api/actualizarDatos": {
+        "/api/crearPlato": {
             "put": {
-                "summary": "actualizarDatos",
-                "operationId": "App\\Http\\Controllers\\UserController::actualizarDatos",
+                "summary": "crearPlato",
+                "operationId": "App\\Http\\Controllers\\PlatosController::crearPlato",
+                "responses": {
+                    "200": {
+                        "description": "Se va crear el usuario."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/actualizarPlato": {
+            "put": {
+                "summary": "actualizarPlato",
+                "operationId": "App\\Http\\Controllers\\PlatosController::actualizarPlato",
                 "responses": {
                     "200": {
                         "description": "Se actualizan los datos del usuario logeado."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/dashabilitatPlato": {
+            "put": {
+                "summary": "dashabilitatPlato",
+                "operationId": "App\\Http\\Controllers\\PlatosController::dashabilitatPlato",
+                "responses": {
+                    "200": {
+                        "description": "Se actualizan los datos del usuario logeado."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/login/{nroDoc}/{pass}": {
+            "get": {
+                "description": "Iniciar sesión",
+                "operationId": "inicioSesion",
+                "parameters": [
+                    {
+                        "name": "nroDoc",
+                        "in": "path",
+                        "description": "Numero de documento",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "String"
+                        }
+                    },
+                    {
+                        "name": "pass",
+                        "in": "path",
+                        "description": "Contraseña inicio de sesion",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "Iniciar sesion."
+                    }
+                }
+            }
+        },
+        "/crearUsuario": {
+            "post": {
+                "description": "Iniciar sesión",
+                "operationId": "crearUsuario",
+                "parameters": [
+                    {
+                        "name": "nroDoc",
+                        "in": "path",
+                        "description": "Numero de documento",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "String"
+                        }
+                    },
+                    {
+                        "name": "nombres",
+                        "in": "path",
+                        "description": "Nombres del usuario",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "apellidos",
+                        "in": "path",
+                        "description": "Apellidos del usuario",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "telefonos",
+                        "in": "path",
+                        "description": "Telefono del usuario",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "idCreador",
+                        "in": "path",
+                        "description": "Creador",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "Iniciar sesion."
+                    }
+                }
+            }
+        },
+        "/actualizarDatos": {
+            "put": {
+                "description": "Iniciar sesión",
+                "operationId": "actualizarDatos",
+                "parameters": [
+                    {
+                        "name": "nombre",
+                        "in": "path",
+                        "description": "Nombres del usuario",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "apellidos",
+                        "in": "path",
+                        "description": "Apellidos del usuario",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "telefono",
+                        "in": "path",
+                        "description": "Telefono del usuario",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id Usuario",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "Iniciar sesion."
+                    }
+                }
+            }
+        },
+        "listaUsuarios/{tiempoToken}": {
+            "get": {
+                "description": "Iniciar sesión",
+                "operationId": "actualizarDatos",
+                "parameters": [
+                    {
+                        "name": "tiempoToken",
+                        "in": "path",
+                        "description": "Tiempo del token",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "Iniciar sesion."
+                    }
+                }
+            }
+        },
+        "/deshabilitarUsuario": {
+            "put": {
+                "description": "Deshabilitar usuarios",
+                "operationId": "deshabilitarUsuario",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del usuario",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "Iniciar sesion."
                     }
                 }
             }
