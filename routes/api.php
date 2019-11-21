@@ -19,7 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware(['guest'])->group(function () {
     Route::get('login/{nroDoc}/{pass}', 'UserController@inicioSesion');
     Route::get('validarToken/{tiempoToken}', 'UserController@validarToken');
-    Route::post('crearUsuario', 'UserController@crearUsuario');
 });
 
 Route::middleware('token')->group(function () {
