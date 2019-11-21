@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware(['guest'])->group(function () {
     Route::get('login/{nroDoc}/{pass}', 'UserController@inicioSesion');
     Route::get('validarToken/{tiempoToken}', 'UserController@validarToken');
+    Route::post('crearUsuario', 'UserController@crearUsuario');
 });
 
 Route::middleware('token')->group(function () {
@@ -27,7 +28,7 @@ Route::middleware('token')->group(function () {
 
     //Controlador de usuario
     Route::put('actualizarDatos', 'UserController@actualizarDatos');
-    Route::post('crearUsuario', 'UserController@crearUsuario');
+    
     Route::get('listaUsuarios/{tiempoToken}', 'UserController@listaUsuarios');
     Route::put('deshabilitarUsuario', 'UserController@deshabilitarUsuario');
 
@@ -36,6 +37,9 @@ Route::middleware('token')->group(function () {
     Route::post('crearPlato', 'PlatosController@crearPlato');
     Route::put('actualizarPlato', 'PlatosController@actualizarPlato');
     Route::put('dashabilitatPlato', 'PlatosController@dashabilitatPlato');
+
+    //Controlador de pisos
+    Route::get('listaPisos/{tiempoToken}', 'PisosController@listaPisos');
     /*Route::get('/', 'Auth\LoginController@mostrarLogin')->name('mostrarLogin');
     Route::post('login', 'Auth\LoginController@login')->name('login');*/
 

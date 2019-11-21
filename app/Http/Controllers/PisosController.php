@@ -84,4 +84,17 @@ class PisosController extends Controller
     {
         //
     }
+
+    public function listaPisos(){
+        $pisos = Pisos::where("estado", 1)->get();
+
+        if (!empty($pisos)) {
+            $resp = array("success" => true,
+                         "mensaje" => $pisos);
+        }else{
+            $resp = array("success" => false,
+                          "mensaje" => "No hay datos");
+        }
+        return $resp;
+    }
 }
