@@ -9,29 +9,32 @@ use Illuminate\Http\Request;
 
 class PedidosController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $platos = Pedidos::with('platos', 'usuario')->where('idCreador', 2)->get();
-        return $platos;
-    }
-
-    public function index2()
-    {
-        $platos = Pedidos::with('Mesa')->get();
-        return $platos;
-    }
-
-    public function index3()
-    {
-        $platos = Pedidos::with('platos', 'usuario')->where('idCreador', 2)->get();
-        return $platos;
-    }
-
+    * @OA\Get(
+    *     path="/listaPedidos/{tiempoToken}",
+    *     description="Lista de pedidos",
+    *     operationId="listaPedidos",
+    *     @OA\Parameter(
+    *         name="tiempoToken",
+    *         in="path",
+    *         description="Tiempo del token",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="String",
+    *         ),
+    *         style="form"
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Id del pedido."
+    *     )
+    * )
+    */
     public function listaPedidos(){
 
         $pedido = DB::table('pedidos')
@@ -52,6 +55,31 @@ class PedidosController extends Controller
         return $resp;
     }
 
+    /**
+    * @OA\Put(
+    *     path="/pagarPedido",
+    *     description="Pagar pedido",
+    *     operationId="pagarPedido",
+    *     @OA\Parameter(
+    *         name="idPedido",
+    *         in="path",
+    *         description="Id del pedido",
+    *         required=true,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Usuario deshabilitado."
+    *     )
+    * )
+    */
+
     public function pagarPedido(Request $request){
         $pago = Pedidos::find($request->idPedido);
         
@@ -66,6 +94,32 @@ class PedidosController extends Controller
         }
         return $resp;
     }
+
+    
+    /**
+    * @OA\Delete(
+    *     path="/eliminarPedido",
+    *     description="Eiminar pedido",
+    *     operationId="eliminarPedido",
+    *     @OA\Parameter(
+    *         name="idPedido",
+    *         in="path",
+    *         description="id del pedido",
+    *         required=true,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Se ha eliminado el pedido."
+    *     )
+    * )
+    */
 
     public function eliminarPedido(Request $request){
         $pedido = Pedidos::find($request->idPedido);

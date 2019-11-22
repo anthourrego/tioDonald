@@ -45,6 +45,82 @@
                 }
             }
         },
+        "/listaPedidos/{tiempoToken}": {
+            "get": {
+                "description": "Lista de pedidos",
+                "operationId": "listaPedidos",
+                "parameters": [
+                    {
+                        "name": "tiempoToken",
+                        "in": "path",
+                        "description": "Tiempo del token",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "String"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "Id del pedido."
+                    }
+                }
+            }
+        },
+        "/pagarPedido": {
+            "put": {
+                "description": "Pagar pedido",
+                "operationId": "pagarPedido",
+                "parameters": [
+                    {
+                        "name": "idPedido",
+                        "in": "path",
+                        "description": "Id del pedido",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "Usuario deshabilitado."
+                    }
+                }
+            }
+        },
+        "/eliminarPedido": {
+            "delete": {
+                "description": "Eiminar pedido",
+                "operationId": "eliminarPedido",
+                "parameters": [
+                    {
+                        "name": "idPedido",
+                        "in": "path",
+                        "description": "id del pedido",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "Se ha eliminado el pedido."
+                    }
+                }
+            }
+        },
         "/crearPedido": {
             "post": {
                 "description": "Crear pedido",
@@ -208,19 +284,6 @@
                     },
                     "200": {
                         "description": "Datos pisos."
-                    }
-                }
-            }
-        },
-        "/api/listaUsuarios": {
-            "get": {
-                "summary": "listaUsuarios",
-                "responses": {
-                    "200": {
-                        "description": "Se actualizan los datos del usuario logeado."
-                    },
-                    "default": {
-                        "description": "Ha ocurrido un error."
                     }
                 }
             }
@@ -558,6 +621,31 @@
                     },
                     "200": {
                         "description": "Usuario deshabilitado."
+                    }
+                }
+            }
+        },
+        "/validarToken/{tiempoToken}": {
+            "get": {
+                "description": "Deshabilitar usuarios",
+                "operationId": "deshabilitarUsuario",
+                "parameters": [
+                    {
+                        "name": "tiempoToken",
+                        "in": "path",
+                        "description": "Tiempo del token",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "Token valido."
                     }
                 }
             }

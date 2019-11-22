@@ -7,21 +7,6 @@ use Illuminate\Http\Request;
 
 class PlatosController extends Controller
 {
-    /**
-    * @OA\get(
-    *     path="/api/listaUsuarios",
-    *     summary="listaUsuarios",
-    *     @OA\Response(
-    *         response=200,
-    *         description="Se actualizan los datos del usuario logeado."
-    *     ),
-    *     @OA\Response(
-    *         response="default",
-    *         description="Ha ocurrido un error."
-    *     )
-    * )
-    */
-
 
     /**
     * @OA\Get(

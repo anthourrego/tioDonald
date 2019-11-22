@@ -312,6 +312,31 @@ class UserController extends Controller
         return $resp;
     } 
 
+    /**
+    * @OA\Get(
+    *     path="/validarToken/{tiempoToken}",
+    *     description="Deshabilitar usuarios",
+    *     operationId="deshabilitarUsuario",
+    *     @OA\Parameter(
+    *         name="tiempoToken",
+    *         in="path",
+    *         description="Tiempo del token",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Token valido."
+    *     )
+    * )
+    */
+
     public function validarToken(Request $request, $tiempoToken){
         $token = $request->header('Authorization', null);
         $tiempoToken = (int)$tiempoToken;
