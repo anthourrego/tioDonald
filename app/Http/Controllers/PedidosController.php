@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pedidos;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class PedidosController extends Controller
@@ -95,6 +96,25 @@ class PedidosController extends Controller
     public function destroy(Pedidos $pedidos)
     {
         //
+    }
+
+    public function listaPedidos(){
+
+        $pedido = DB::table('pedidos')
+            ->join('mesas', 'pedidos.idMesa', '=', 'mesas.id')
+            ->join('pisos', 'mesas.idPiso', '=', 'pisos.id')
+            ->select('pedidos.*', 'mesas.nroMesa', 'pisos.nroPiso')
+            ->where('pedidos.estado', 1)
+            ->get();
+
+        if (!$pedido->isEmpty()) {
+            $resp = array("success" => true,
+                        "mensaje" => $pedido);
+        }else{
+            $resp = array("success" => false,
+                        "mensaje" => "No se encontraron datos");
+        }
+        return $resp;
     }
 
     public function crearPedido(Request $request){
