@@ -52,7 +52,4 @@ Route::middleware('token')->group(function () {
     Route::post('crearDetalle', 'PedidosDetalleController@crearDetalle');
     Route::get('PedidoDetallePlatos/{tiempoToken}/{idPedido}', 'PedidosDetalleController@PedidoDetallePlatos');
     Route::delete('eliminarPlatoDetalle', 'PedidosDetalleController@eliminarPlatoDetalle');
-    /*Route::get('/', 'Auth\LoginController@mostrarLogin')->name('mostrarLogin');
-    Route::post('login', 'Auth\LoginController@login')->name('login');*/
-
 });
