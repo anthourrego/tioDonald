@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PedidosDetalle extends Migration
+class CreatePedidosDetallesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class PedidosDetalle extends Migration
      */
     public function up()
     {
-        Schema::create('pedidos_detalle', function (Blueprint $table) {
+        Schema::create('pedidos_detalles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('idPedido');
             $table->foreign('idPedido')->references('id')->on('pedidos');
@@ -34,6 +34,6 @@ class PedidosDetalle extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pedidos_detalle');
+        Schema::dropIfExists('pedidos_detalles');
     }
 }

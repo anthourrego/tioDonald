@@ -96,4 +96,21 @@ class PedidosController extends Controller
     {
         //
     }
+
+    public function crearPedido(Request $request){
+        $pedido = new Pedidos;
+        $pedido->idMesa = $request->idMesa;
+        $pedido->estado = 1;
+        $pedido->idCreador = $request->idCreador;
+
+        if($pedido->save()){
+            $resp = array("success" => true,
+                            "mensaje" => $pedido->id);
+        }else{
+            $resp = array("success" => false,
+                            "mensaje" => "No se ha creado el usuario");
+        }
+
+        return $resp;
+    }
 }

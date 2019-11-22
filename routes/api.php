@@ -19,15 +19,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware(['guest'])->group(function () {
     Route::get('login/{nroDoc}/{pass}', 'UserController@inicioSesion');
     Route::get('validarToken/{tiempoToken}', 'UserController@validarToken');
+    Route::post('crearDetalle', 'PedidosDetalleController@crearDetalle');
 });
 
 Route::middleware('token')->group(function () {
     Route::get('mesas', 'MesasController@index');   
     
-
     //Controlador de usuario
     Route::put('actualizarDatos', 'UserController@actualizarDatos');
-    
+    Route::post('crearUsuario', 'UserController@crearUsuario');
     Route::get('listaUsuarios/{tiempoToken}', 'UserController@listaUsuarios');
     Route::put('deshabilitarUsuario', 'UserController@deshabilitarUsuario');
 
@@ -39,6 +39,15 @@ Route::middleware('token')->group(function () {
 
     //Controlador de pisos
     Route::get('listaPisos/{tiempoToken}', 'PisosController@listaPisos');
+
+    //Controlador de mesas
+    Route::get('mesasPorPiso/{tiempoToken}/{piso}', 'MesasController@mesasPorPiso');
+
+    //Controlador de pedido
+    Route::post('crearPedido', 'PedidosController@crearPedido');
+
+    //Controlador de PedidosDetalle
+    
     /*Route::get('/', 'Auth\LoginController@mostrarLogin')->name('mostrarLogin');
     Route::post('login', 'Auth\LoginController@login')->name('login');*/
 

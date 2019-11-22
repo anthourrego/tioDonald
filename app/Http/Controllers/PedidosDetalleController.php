@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Mesas;
+use App\PedidosDetalle;
 use Illuminate\Http\Request;
 
-class MesasController extends Controller
+class PedidosDetalleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,15 +15,6 @@ class MesasController extends Controller
     public function index()
     {
         //
-        $mesas = Mesas::with('Piso')->get();
-        return $mesas;
-    }
-
-    public function index2()
-    {
-        //
-        $mesas = Mesas::with('Pedidos')->get();
-        return $mesas;
     }
 
     /**
@@ -50,10 +41,10 @@ class MesasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Mesas  $mesas
+     * @param  \App\PedidosDetalle  $pedidosDetalle
      * @return \Illuminate\Http\Response
      */
-    public function show(Mesas $mesas)
+    public function show(PedidosDetalle $pedidosDetalle)
     {
         //
     }
@@ -61,10 +52,10 @@ class MesasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Mesas  $mesas
+     * @param  \App\PedidosDetalle  $pedidosDetalle
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mesas $mesas)
+    public function edit(PedidosDetalle $pedidosDetalle)
     {
         //
     }
@@ -73,10 +64,10 @@ class MesasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Mesas  $mesas
+     * @param  \App\PedidosDetalle  $pedidosDetalle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mesas $mesas)
+    public function update(Request $request, PedidosDetalle $pedidosDetalle)
     {
         //
     }
@@ -84,24 +75,31 @@ class MesasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Mesas  $mesas
+     * @param  \App\PedidosDetalle  $pedidosDetalle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mesas $mesas)
+    public function destroy(PedidosDetalle $pedidosDetalle)
     {
         //
     }
 
-    public function mesasPorPiso($tiempoToken, $piso){
-        $mesas = Mesas::where("estado", 1)->where("idPiso", $piso)->get();
+    public function crearDetalle(Request $request){
+        $detalle = new PedidosDetalle;
 
-        if (!empty($mesas)) {
+        $detalle->idPedido = $request->idPedido;
+        $detalle->idPlato = $request->idPlato;
+        $detalle->precio = $request->precio;
+        $detalle->estado = 0;
+        $detalle->idCreador = $request->idCreador;
+
+        if ($detalle->save()) {
             $resp = array("success" => true,
-                         "mensaje" => $mesas);
+                        "mensaje" => "Se ha agregado");
         }else{
             $resp = array("success" => false,
-                          "mensaje" => "No hay datos");
+                         "mensaje" => "No de ha añadido");
         }
+
         return $resp;
     }
 }
