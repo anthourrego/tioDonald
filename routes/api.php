@@ -45,6 +45,8 @@ Route::middleware('token')->group(function () {
     //Controlador de pedido
     Route::post('crearPedido', 'PedidosController@crearPedido');
     Route::get('listaPedidos/{tiempoToken}', 'PedidosController@listaPedidos');
+    Route::delete('eliminarPedido', 'PedidosController@eliminarPedido');
+    Route::put('pagarPedido', 'PedidosController@pagarPedido');
 
     //Controlador de PedidosDetalle
     Route::post('crearDetalle', 'PedidosDetalleController@crearDetalle');

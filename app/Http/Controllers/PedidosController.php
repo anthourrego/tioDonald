@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pedidos;
+use App\PedidosDetalle;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -31,79 +32,13 @@ class PedidosController extends Controller
         return $platos;
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Pedidos  $pedidos
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Pedidos $pedidos)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Pedidos  $pedidos
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Pedidos $pedidos)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Pedidos  $pedidos
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Pedidos $pedidos)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Pedidos  $pedidos
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Pedidos $pedidos)
-    {
-        //
-    }
-
     public function listaPedidos(){
 
         $pedido = DB::table('pedidos')
             ->join('mesas', 'pedidos.idMesa', '=', 'mesas.id')
             ->join('pisos', 'mesas.idPiso', '=', 'pisos.id')
-            ->select('pedidos.*', 'mesas.nroMesa', 'pisos.nroPiso')
+            ->join('users', 'pedidos.idCreador', '=', 'users.id')
+            ->select('pedidos.*', 'mesas.nroMesa', 'pisos.nroPiso', 'users.nombres', 'users.apellidos')
             ->where('pedidos.estado', 1)
             ->get();
 
@@ -115,6 +50,47 @@ class PedidosController extends Controller
                         "mensaje" => "No se encontraron datos");
         }
         return $resp;
+    }
+
+    public function pagarPedido(Request $request){
+        $pago = Pedidos::find($request->idPedido);
+        
+        $pago{'estado'} = 0;
+
+        if ($pago->save()) {
+            $resp = array("success" => true,
+                         "mensaje" => "Pago completado");
+        }else{
+            $resp = array("success" => false,
+                         "mensaje" => "Error al realizar el pago");
+        }
+        return $resp;
+    }
+
+    public function eliminarPedido(Request $request){
+        $pedido = Pedidos::find($request->idPedido);
+        $pedidosDetalle = PedidosDetalle::where('idPedido', $request->idPedido)->get();
+
+        if(!empty($pedido)){
+            if(!empty($pedidosDetalle)){
+                PedidosDetalle::where('idPedido', $request->idPedido)->delete();
+            }
+
+            if($pedido->delete()){
+                $resp = array("success" => true,
+                                 "mensaje" => "Se ha eliminado el pedido");
+            }else{
+                $resp = array("success" => false,
+                                 "mensaje" => "No se ha eliminado");
+            }
+
+        }else{
+            $resp = array("success" => false,
+                    "mensaje" => "Este nro de pedido no existe");
+        }
+        
+        return $resp;
+
     }
 
 
