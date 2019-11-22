@@ -47,7 +47,7 @@ class UserController extends Controller
     *     ),
     *     @OA\Response(
     *         response=200,
-    *         description="Iniciar sesion."
+    *         description="Token del usuario."
     *     )
     * )
     */
@@ -208,11 +208,10 @@ class UserController extends Controller
     *     ),
     *     @OA\Response(
     *         response=200,
-    *         description="Iniciar sesion."
+    *         description="Se ha creado el usuario."
     *     )
     * )
     */
-
     public function crearUsuario(Request $request){
         $validar = User::where('nroDocumento', $request->nroDoc)->get();
         
@@ -289,7 +288,7 @@ class UserController extends Controller
     *     ),
     *     @OA\Response(
     *         response=200,
-    *         description="Iniciar sesion."
+    *         description="Usuario actualizado correctamente."
     *     )
     * )
     */
@@ -332,7 +331,7 @@ class UserController extends Controller
     *     ),
     *     @OA\Response(
     *         response=200,
-    *         description="Iniciar sesion."
+    *         description="Datos usuarios."
     *     )
     * )
     */
@@ -370,7 +369,7 @@ class UserController extends Controller
     *     ),
     *     @OA\Response(
     *         response=200,
-    *         description="Iniciar sesion."
+    *         description="Usuario deshabilitado."
     *     )
     * )
     */

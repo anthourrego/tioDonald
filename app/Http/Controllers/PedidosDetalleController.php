@@ -84,6 +84,40 @@ class PedidosDetalleController extends Controller
         //
     }
 
+    /**
+    * @OA\Get(
+    *     path="/PedidoDetallePlatos/{tiempoToken}/{idPedido}",
+    *     description="Detalles del pedido",
+    *     operationId="PedidoDetallePlatos",
+    *     @OA\Parameter(
+    *         name="tiempoToken",
+    *         in="path",
+    *         description="Tiempo del token",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
+    *     ),
+    *     @OA\Parameter(
+    *         name="idPedido",
+    *         in="path",
+    *         description="Id pedido",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="String",
+    *         ),
+    *         style="form"
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Detalles pedido."
+    *     )
+    * )
+    */
     public function PedidoDetallePlatos($tiempoToken, $idPedido){
         $pedido = DB::table('pedidos_detalles')
             ->join('platos', 'pedidos_detalles.idPlato', '=', 'platos.id')
@@ -102,6 +136,31 @@ class PedidosDetalleController extends Controller
         return $resp;
     }
 
+    /**
+    * @OA\Delete(
+    *     path="/eliminarPlatoDetalle",
+    *     description="Eliminar detalles del plato",
+    *     operationId="eliminarPlatoDetalle",
+    *     @OA\Parameter(
+    *         name="idDetalle",
+    *         in="path",
+    *         description="Id del detalles del plato",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="String",
+    *         ),
+    *         style="form"
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Se ha eliminado."
+    *     )
+    * )
+    */
     public function eliminarPlatoDetalle(Request $request){
         $detalle = PedidosDetalle::find($request->idDetalle);
 
@@ -119,6 +178,62 @@ class PedidosDetalleController extends Controller
         return $resp;
     }
 
+
+    /**
+    * @OA\Get(
+    *     path="/crearDetalle",
+    *     description="Crear detalles del pedido",
+    *     operationId="crearDetalle",
+    *     @OA\Parameter(
+    *         name="idPedido",
+    *         in="path",
+    *         description="Id pedido",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="String",
+    *         ),
+    *         style="form"
+    *     ),
+    *     @OA\Parameter(
+    *         name="idPlato",
+    *         in="path",
+    *         description="Id plato",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="String",
+    *         ),
+    *         style="form"
+    *     ),
+    *     @OA\Parameter(
+    *         name="precio",
+    *         in="path",
+    *         description="precio del plato",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="String",
+    *         ),
+    *         style="form"
+    *     ),
+    *     @OA\Parameter(
+    *         name="idPedido",
+    *         in="path",
+    *         description="Id del mesero el cual realza el pedido",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="String",
+    *         ),
+    *         style="form"
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Se ha agregado."
+    *     )
+    * )
+    */
     public function crearDetalle(Request $request){
         $detalle = new PedidosDetalle;
 

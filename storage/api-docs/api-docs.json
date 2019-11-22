@@ -10,10 +10,211 @@
         }
     ],
     "paths": {
+        "/mesasPorPiso/{tiempoToken}/{piso}": {
+            "get": {
+                "description": "Mesas por cada piso",
+                "operationId": "mesasPorPiso",
+                "parameters": [
+                    {
+                        "name": "tiempoToken",
+                        "in": "path",
+                        "description": "Tiempo del token",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "piso",
+                        "in": "path",
+                        "description": "Numero de piso",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "String"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "Id del pedido."
+                    }
+                }
+            }
+        },
+        "/crearPedido": {
+            "post": {
+                "description": "Crear pedido",
+                "operationId": "crearPedido",
+                "parameters": [
+                    {
+                        "name": "idMesa",
+                        "in": "path",
+                        "description": "Id mesa",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "String"
+                        }
+                    },
+                    {
+                        "name": "idCreador",
+                        "in": "path",
+                        "description": "Id creador pedido",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "String"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "Id del pedido."
+                    }
+                }
+            }
+        },
+        "/PedidoDetallePlatos/{tiempoToken}/{idPedido}": {
+            "get": {
+                "description": "Detalles del pedido",
+                "operationId": "PedidoDetallePlatos",
+                "parameters": [
+                    {
+                        "name": "tiempoToken",
+                        "in": "path",
+                        "description": "Tiempo del token",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "idPedido",
+                        "in": "path",
+                        "description": "Id pedido",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "String"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "Detalles pedido."
+                    }
+                }
+            }
+        },
+        "/eliminarPlatoDetalle": {
+            "delete": {
+                "description": "Eliminar detalles del plato",
+                "operationId": "eliminarPlatoDetalle",
+                "parameters": [
+                    {
+                        "name": "idDetalle",
+                        "in": "path",
+                        "description": "Id del detalles del plato",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "String"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "Se ha eliminado."
+                    }
+                }
+            }
+        },
+        "/crearDetalle": {
+            "get": {
+                "description": "Crear detalles del pedido",
+                "operationId": "crearDetalle",
+                "parameters": [
+                    {
+                        "name": "idPedido",
+                        "in": "path",
+                        "description": "Id pedido",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "String"
+                        }
+                    },
+                    {
+                        "name": "idPlato",
+                        "in": "path",
+                        "description": "Id plato",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "String"
+                        }
+                    },
+                    {
+                        "name": "precio",
+                        "in": "path",
+                        "description": "precio del plato",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "String"
+                        }
+                    },
+                    {
+                        "name": "idPedido",
+                        "in": "path",
+                        "description": "Id del mesero el cual realza el pedido",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "String"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "Se ha agregado."
+                    }
+                }
+            }
+        },
+        "/listaPisos/{tiempoToken}": {
+            "get": {
+                "description": "Listar los pisos",
+                "operationId": "listaPisos",
+                "responses": {
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "Datos pisos."
+                    }
+                }
+            }
+        },
         "/api/listaUsuarios": {
             "get": {
                 "summary": "listaUsuarios",
-                "operationId": "App\\Http\\Controllers\\PlatosController::listaPlatos",
                 "responses": {
                     "200": {
                         "description": "Se actualizan los datos del usuario logeado."
@@ -24,44 +225,140 @@
                 }
             }
         },
-        "/api/crearPlato": {
-            "put": {
-                "summary": "crearPlato",
-                "operationId": "App\\Http\\Controllers\\PlatosController::crearPlato",
+        "/listaPlatos/{tiempoToken}": {
+            "get": {
+                "description": "LIstar los platos",
+                "operationId": "listaPlatos",
+                "parameters": [
+                    {
+                        "name": "tiempoToken",
+                        "in": "path",
+                        "description": "Tiempo del token",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
-                    "200": {
-                        "description": "Se va crear el usuario."
-                    },
                     "default": {
                         "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "Detalles platos."
                     }
                 }
             }
         },
-        "/api/actualizarPlato": {
-            "put": {
-                "summary": "actualizarPlato",
-                "operationId": "App\\Http\\Controllers\\PlatosController::actualizarPlato",
-                "responses": {
-                    "200": {
-                        "description": "Se actualizan los datos del usuario logeado."
+        "/crearPlato": {
+            "post": {
+                "description": "Crear platos",
+                "operationId": "crearPlato",
+                "parameters": [
+                    {
+                        "name": "nombre",
+                        "in": "path",
+                        "description": "Nombre del plato",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "String"
+                        }
                     },
+                    {
+                        "name": "precio",
+                        "in": "path",
+                        "description": "Precio del plato",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "idCreador",
+                        "in": "path",
+                        "description": "Persona que creo el plato",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
                     "default": {
                         "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "Se ha creado el plato."
                     }
                 }
             }
         },
-        "/api/dashabilitatPlato": {
+        "/actualizarPlato": {
             "put": {
-                "summary": "dashabilitatPlato",
-                "operationId": "App\\Http\\Controllers\\PlatosController::dashabilitatPlato",
-                "responses": {
-                    "200": {
-                        "description": "Se actualizan los datos del usuario logeado."
+                "description": "Actualizar platos",
+                "operationId": "actualizarPlato",
+                "parameters": [
+                    {
+                        "name": "nombre",
+                        "in": "path",
+                        "description": "Nombre del plato",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "String"
+                        }
                     },
+                    {
+                        "name": "precio",
+                        "in": "path",
+                        "description": "Precio del plato",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del plato",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
                     "default": {
                         "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "El plato se ha actualizado."
+                    }
+                }
+            }
+        },
+        "/dashabilitatPlato": {
+            "put": {
+                "description": "Deshabilitar plato",
+                "operationId": "dashabilitatPlato",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del plato",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    },
+                    "200": {
+                        "description": "PLato deshabilitado."
                     }
                 }
             }
@@ -96,7 +393,7 @@
                         "description": "Ha ocurrido un error."
                     },
                     "200": {
-                        "description": "Iniciar sesion."
+                        "description": "Token del usuario."
                     }
                 }
             }
@@ -158,7 +455,7 @@
                         "description": "Ha ocurrido un error."
                     },
                     "200": {
-                        "description": "Iniciar sesion."
+                        "description": "Se ha creado el usuario."
                     }
                 }
             }
@@ -210,7 +507,7 @@
                         "description": "Ha ocurrido un error."
                     },
                     "200": {
-                        "description": "Iniciar sesion."
+                        "description": "Usuario actualizado correctamente."
                     }
                 }
             }
@@ -235,7 +532,7 @@
                         "description": "Ha ocurrido un error."
                     },
                     "200": {
-                        "description": "Iniciar sesion."
+                        "description": "Datos usuarios."
                     }
                 }
             }
@@ -260,7 +557,7 @@
                         "description": "Ha ocurrido un error."
                     },
                     "200": {
-                        "description": "Iniciar sesion."
+                        "description": "Usuario deshabilitado."
                     }
                 }
             }

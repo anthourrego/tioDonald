@@ -99,6 +99,31 @@ class PlatosController extends Controller
     * )
     */
 
+
+    /**
+    * @OA\Get(
+    *     path="/listaPlatos/{tiempoToken}",
+    *     description="LIstar los platos",
+    *     operationId="listaPlatos",
+    *     @OA\Parameter(
+    *         name="tiempoToken",
+    *         in="path",
+    *         description="Tiempo del token",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Detalles platos."
+    *     )
+    * )
+    */
     public function listaPlatos(){
         $platos = platos::where("estado", 1)->get();
 
@@ -113,20 +138,48 @@ class PlatosController extends Controller
     }
 
     /**
-    * @OA\put(
-    *     path="/api/crearPlato",
-    *     summary="crearPlato",
-    *     @OA\Response(
-    *         response=200,
-    *         description="Se va crear el usuario."
+    * @OA\Post(
+    *     path="/crearPlato",
+    *     description="Crear platos",
+    *     operationId="crearPlato",
+    *     @OA\Parameter(
+    *         name="nombre",
+    *         in="path",
+    *         description="Nombre del plato",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="String",
+    *         ),
+    *         style="form"
+    *     ),
+    *     @OA\Parameter(
+    *         name="precio",
+    *         in="path",
+    *         description="Precio del plato",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
+    *     ),
+    *     @OA\Parameter(
+    *         name="idCreador",
+    *         in="path",
+    *         description="Persona que creo el plato",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
     *     ),
     *     @OA\Response(
     *         response="default",
     *         description="Ha ocurrido un error."
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Se ha creado el plato."
     *     )
     * )
     */
-
     public function crearPlato(Request $request){
         $validar = Platos::where('nombre', $request->nombre)->get();
         
@@ -154,20 +207,48 @@ class PlatosController extends Controller
     }
 
     /**
-    * @OA\put(
-    *     path="/api/actualizarPlato",
-    *     summary="actualizarPlato",
-    *     @OA\Response(
-    *         response=200,
-    *         description="Se actualizan los datos del usuario logeado."
+    * @OA\Put(
+    *     path="/actualizarPlato",
+    *     description="Actualizar platos",
+    *     operationId="actualizarPlato",
+    *     @OA\Parameter(
+    *         name="nombre",
+    *         in="path",
+    *         description="Nombre del plato",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="String",
+    *         ),
+    *         style="form"
+    *     ),
+    *     @OA\Parameter(
+    *         name="precio",
+    *         in="path",
+    *         description="Precio del plato",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
+    *     ),
+    *     @OA\Parameter(
+    *         name="id",
+    *         in="path",
+    *         description="Id del plato",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
     *     ),
     *     @OA\Response(
     *         response="default",
     *         description="Ha ocurrido un error."
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="El plato se ha actualizado."
     *     )
     * )
     */
-
     public function actualizarPlato(Request $request){
         $plato = Platos::find($request->id);
 
@@ -195,20 +276,29 @@ class PlatosController extends Controller
     } 
 
     /**
-    * @OA\put(
-    *     path="/api/dashabilitatPlato",
-    *     summary="dashabilitatPlato",
-    *     @OA\Response(
-    *         response=200,
-    *         description="Se actualizan los datos del usuario logeado."
+    * @OA\Put(
+    *     path="/dashabilitatPlato",
+    *     description="Deshabilitar plato",
+    *     operationId="dashabilitatPlato",
+    *     @OA\Parameter(
+    *         name="id",
+    *         in="path",
+    *         description="Id del plato",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="string"
+    *         )
     *     ),
     *     @OA\Response(
     *         response="default",
     *         description="Ha ocurrido un error."
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="PLato deshabilitado."
     *     )
     * )
     */
-
     public function dashabilitatPlato(Request $request){
         $plato = Platos::find($request->id);
         

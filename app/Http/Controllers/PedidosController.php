@@ -117,6 +117,42 @@ class PedidosController extends Controller
         return $resp;
     }
 
+
+    /**
+    * @OA\Post(
+    *     path="/crearPedido",
+    *     description="Crear pedido",
+    *     operationId="crearPedido",
+    *     @OA\Parameter(
+    *         name="idMesa",
+    *         in="path",
+    *         description="Id mesa",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="String",
+    *         ),
+    *         style="form"
+    *     ),
+    *     @OA\Parameter(
+    *         name="idCreador",
+    *         in="path",
+    *         description="Id creador pedido",
+    *         required=false,
+    *         @OA\Schema(
+    *             type="String",
+    *         ),
+    *         style="form"
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Id del pedido."
+    *     )
+    * )
+    */
     public function crearPedido(Request $request){
         $pedido = new Pedidos;
         $pedido->idMesa = $request->idMesa;
