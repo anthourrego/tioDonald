@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\PedidosDetalle;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class PedidosDetalleController extends Controller
@@ -81,6 +82,41 @@ class PedidosDetalleController extends Controller
     public function destroy(PedidosDetalle $pedidosDetalle)
     {
         //
+    }
+
+    public function PedidoDetallePlatos($tiempoToken, $idPedido){
+        $pedido = DB::table('pedidos_detalles')
+            ->join('platos', 'pedidos_detalles.idPlato', '=', 'platos.id')
+            ->select('pedidos_detalles.*', 'platos.nombre')
+            ->where('idPedido', $idPedido)
+            ->get();
+
+        if (!$pedido->isEmpty()) {
+            $resp = array("success" => true,
+                        "mensaje" => $pedido);
+        }else{
+            $resp = array("success" => false,
+                        "mensaje" => "No se encontraron datos");
+        }
+
+        return $resp;
+    }
+
+    public function eliminarPlatoDetalle(Request $request){
+        $detalle = PedidosDetalle::find($request->idDetalle);
+
+        if (!empty($detalle)) {
+            if ($detalle->delete()) {
+                $resp = array("success" => true, "mensaje" => "Se ha eliminado");
+            }else{
+                $resp = array("success" => false, "mensaje" => "Error al eliminar");
+            }
+            
+        }else{
+            $resp = array("success" => false, "mensaje" => "No se encontro el plato");
+        }
+
+        return $resp;
     }
 
     public function crearDetalle(Request $request){

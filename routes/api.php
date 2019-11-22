@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware(['guest'])->group(function () {
     Route::get('login/{nroDoc}/{pass}', 'UserController@inicioSesion');
     Route::get('validarToken/{tiempoToken}', 'UserController@validarToken');
-    Route::post('crearDetalle', 'PedidosDetalleController@crearDetalle');
+    Route::delete('eliminarPlatoDetalle', 'PedidosDetalleController@eliminarPlatoDetalle');
 });
 
 Route::middleware('token')->group(function () {
@@ -47,6 +47,8 @@ Route::middleware('token')->group(function () {
     Route::post('crearPedido', 'PedidosController@crearPedido');
 
     //Controlador de PedidosDetalle
+    Route::post('crearDetalle', 'PedidosDetalleController@crearDetalle');
+    Route::get('PedidoDetallePlatos/{tiempoToken}/{idPedido}', 'PedidosDetalleController@PedidoDetallePlatos');
     
     /*Route::get('/', 'Auth\LoginController@mostrarLogin')->name('mostrarLogin');
     Route::post('login', 'Auth\LoginController@login')->name('login');*/
