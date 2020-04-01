@@ -163,8 +163,8 @@ class PlatosController extends Controller
         if(!empty($plato)){
             $validar = Platos::where('nombre', $request->nombre)->where('id', '!=', $request->id)->get();
             if (count($validar) == 0) {
-                $plato{'nombre'} = $request->nombre;
-                $plato{'precio'} = $request->precio;
+                $plato['nombre'] = $request->nombre;
+                $plato['precio'] = $request->precio;
                 if ($plato->save()) {
                     $resp = array("success" => true,
                             "mensaje" => "El plato se ha actualizado");
@@ -210,7 +210,7 @@ class PlatosController extends Controller
     public function dashabilitatPlato(Request $request){
         $plato = Platos::find($request->id);
         
-        $plato{'estado'} = 0;
+        $plato['estado'] = 0;
 
         if ($plato->save()) {
             $resp = array("success" => true,

@@ -19,9 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware(['guest'])->group(function () {
     Route::get('login/{nroDoc}/{pass}', 'UserController@inicioSesion');
     Route::get('validarToken/{tiempoToken}', 'UserController@validarToken');
+    Route::get('listaPlatos', 'PlatosController@listaPlatos');
 });
 
-Route::middleware('token')->group(function () {
+/* Route::middleware('token')->group(function () {
     Route::get('mesas', 'MesasController@index');   
     
     //Controlador de usuario
@@ -31,7 +32,7 @@ Route::middleware('token')->group(function () {
     Route::put('deshabilitarUsuario', 'UserController@deshabilitarUsuario');
 
     //Controlador de platos
-    Route::get('listaPlatos/{tiempoToken}', 'PlatosController@listaPlatos');
+    //Route::get('listaPlatos/{tiempoToken}', 'PlatosController@listaPlatos');
     Route::post('crearPlato', 'PlatosController@crearPlato');
     Route::put('actualizarPlato', 'PlatosController@actualizarPlato');
     Route::put('dashabilitatPlato', 'PlatosController@dashabilitatPlato');
@@ -53,3 +54,4 @@ Route::middleware('token')->group(function () {
     Route::get('PedidoDetallePlatos/{tiempoToken}/{idPedido}', 'PedidosDetalleController@PedidoDetallePlatos');
     Route::delete('eliminarPlatoDetalle', 'PedidosDetalleController@eliminarPlatoDetalle');
 });
+ */
